@@ -27,12 +27,11 @@ class GoodSpider(CrawlSpider):
 
     def product_parse(self, response):
         book = Book()
-        book['title'] = (response.selector.xpath('//*[@id="bookTitle"]/text()').extract()[0]).strip()
-        book['author'] = response.selector.xpath('//*[@itemprop="name"]/text()').extract()[1]
-        book['btype'] = response.selector.xpath('//*[@itemprop="bookFormatType"]/text()').extract()[0]
+        # book['title'] = (response.selector.xpath('//*[@id="bookTitle"]/text()').extract()[0]).strip()
+        # book['author'] = response.selector.xpath('//*[@itemprop="name"]/text()').extract()[1]
+        # book['btype'] = response.selector.xpath('//*[@itemprop="bookFormatType"]/text()').extract()[0]
         book['website']= "Goodreads"
         book['rating'] = response.selector.xpath('//*[@itemprop="ratingValue"]/text()').extract()[0]
-        book['blurb'] =  ''.join(response.selector.xpath('//*[@id="description"]//span[contains(@style,"none")]/text()').extract()).replace('\xa0','')
-        # print(book['blurb'])
+        book['count'] = response.selector.xpath('//*[@itemprop="ratingCount"]/text()').extract()[0]
+        # book['blurb'] =  ''.join(response.selector.xpath('//*[@id="description"]//span[contains(@style,"none")]/text()').extract()).replace('\xa0','')
         yield book
-        #' '.join(response.selector.xpath('//*[@id="description"]//span/text()').extract()[1:])

@@ -29,13 +29,20 @@ tree.heading("price", text="Price")
 tree.heading("type", text="Binding")
 tree.heading("website", text="Website")
 # tree.heading("blurb", text="Goodreads blurb")
-
+de=ast.literal_eval(list[2])
 for i in list[:2]:
 	d=ast.literal_eval(i)
-	var = StringVar()
-	label = Label( root, textvariable=var, relief=RAISED )
 	tree.insert("",0,text=d["title"], values=(d["author"],d["price"], d["btype"], d["website"]))
 
 
 tree.pack()
+
+tree2 = ttk.Treeview(root)
+tree2["columns"]=("rating", "count")
+tree2.column("rating", width=100 )
+tree2.column("count", width=200 )
+tree2.heading("rating", text="Rating")
+tree2.heading("count", text="Rating Count")
+tree2.insert("",0,text="Goodreads info", values=(de["rating"], de["count"]))
+tree2.pack()
 root.mainloop()

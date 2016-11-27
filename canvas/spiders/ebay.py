@@ -24,10 +24,6 @@ class EbaySpider(CrawlSpider):
         b=response.selector.xpath('//*[@class="vip"]/@href').extract()
         if b:
         	a= response.selector.xpath('//*[@class="vip"]/@href').extract()[0]
-        	# yield {
-        	# 	'book' : response.css('a h2::text').extract_first() ,
-        	# 	'link' : a
-        	# }
         	next_page = a
         	if next_page is not None:
                    next_page = response.urljoin(next_page)
